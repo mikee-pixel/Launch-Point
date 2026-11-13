@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens: code version of design-system/launchpoint/MASTER.md.
+ * If they disagree, MASTER.md wins. Components use these tokens only, never raw hex.
+ * Spacing: Tailwind's default 4px scale already matches MASTER (xs=1, sm=2, md=4, lg=6, xl=8, 2xl=12, 3xl=16, 4xl=24).
+ */
+@theme {
+  /* Brand */
+  --color-navy-950: #0d0e2b;
+  --color-navy-900: #15153d;
+  --color-navy-800: #201d52;
+  --color-primary: #6559c9;
+  --color-violet-ink: #5546b8;
+  --color-orchid: #c56ae4;
+  --color-brand-blue: #054aae;
+
+  /* Neutrals, tinted toward the brand violet */
+  --color-paper: #f6f5fb;
+  --color-card: #ffffff;
+  --color-ink: #15143a;
+  --color-ink-muted: #54547a;
+  --color-line: #e3e1ef;
+  --color-line-strong: #d6d2ea;
+  --color-on-dark: #ffffff;
+  --color-on-dark-muted: #b9b8d9;
+  --color-line-dark: rgb(255 255 255 / 0.12);
+  --color-backdrop: rgb(6 7 24 / 0.6);
+
+  /* Semantic aliases (CLAUDE.md: bg-background, text-foreground, text-brand) */
+  --color-background: var(--color-paper);
+  --color-foreground: var(--color-ink);
+  --color-brand: var(--color-primary);
+  /* Focus ring: violet ink on light bands (6.56:1 on paper); `tone-dark` switches it to orchid. */
+  --color-ring: var(--color-violet-ink);
+  --color-ring-dark: var(--color-orchid);
+
+  /* Type (variables are set by next/font in layout.tsx) */
+  --font-display: var(--font-montserrat), "Segoe UI", system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), "Segoe UI", system-ui, sans-serif;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+
+  /* Shadows, tinted toward navy */
+  --shadow-sm: 0 1px 2px rgb(13 14 43 / 0.06);
+  --shadow-md: 0 4px 6px rgb(13 14 43 / 0.08);
+  --shadow-lg: 0 10px 15px rgb(13 14 43 / 0.1);
+  --shadow-xl: 0 12px 32px rgb(0 0 0 / 0.35);
+
+  /* Motion */
+  --ease-brand: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-rise: rise 700ms var(--ease-brand) both;
+  /* Transform only: for the h1 / LCP text, which must be visible on first paint. */
+  --animate-lift: lift 700ms var(--ease-brand) both;
+  --animate-spin-slow: spin 120s linear infinite;
+
+  @keyframes lift {
+    from {
+      transform: translateY(12px);
+    }
+    to {
+      transform: none;
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* Brand gradient: hairline use only (MASTER.md). */
+@utility bg-brand-gradient {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-brand-blue),
+    var(--color-primary) 50%,
+    var(--color-orchid)
+  );
+}
+
+/*
+ * Soft brand glow behind dark bands (mockup: radial-gradient(closest-side, rgba(44,64,180,α), transparent 70%)).
+ * The colour deliberately lives outside the --color-* namespace: a --color-glow token would make
+ * Tailwind generate its own `bg-glow` (solid background-color) and paint a square behind the gradient.
+ * Strength per band, as in the mockup: bg-glow (hero .55), bg-glow-soft (leadership .45), bg-glow-strong (CTA .6).
+ */
+@utility bg-glow {
+  background-image: radial-gradient(
+    closest-side,
+    rgb(var(--glow-rgb) / 0.55),
+    transparent 70%
+  );
+}
+
+@utility bg-glow-soft {
+  background-image: radial-gradient(
+    closest-side,
+    rgb(var(--glow-rgb) / 0.45),
+    transparent 70%
+  );
+}
+
+@utility bg-glow-strong {
+  background-image: radial-gradient(
+    closest-side,
+    rgb(var(--glow-rgb) / 0.6),
+    transparent 70%
+  );
+}
+
+/* Put on every dark band (header, footer, dark sections): orchid focus ring, 5.4:1+ on navy. */
+@utility tone-dark {
+  --focus-ring: var(--color-ring-dark);
+}
+
+@layer base {
+  :root {
+    /* Glow hue (royal blue), as "r g b" so the glow utilities can set alpha. */
+    --glow-rgb: 44 64 180;
+  }
+
+  html {
+    color-scheme: light;
+    /* Drawer scroll lock removes the scrollbar; keep its gutter so the page doesn't shift. */
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-navy-950);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  /* Keep anchor targets clear of the sticky header (72px). */
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus-ring, var(--color-ring));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  button:not(:disabled),
+  summary,
+  [role="button"] {
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      /* Delays would otherwise hold `both`-filled elements at opacity 0 before the instant animation. */
+      animation-delay: 0s !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

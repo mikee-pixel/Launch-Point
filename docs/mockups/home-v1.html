@@ -1,0 +1,720 @@
+<title>Launch:Point Home Mockup</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout concept: alternating dark (brand navy) and light (lavender-white) bands,
+   left-aligned editorial headings, one magenta accent, orbit motif from the rocket mark.
+   Deliberately single-look: the brand bands are fixed, so no light/dark swap. */
+:root {
+  color-scheme: light;
+  /* Brand (from the existing Launch:Point site) */
+  --navy-950: #0d0e2b;
+  --navy-900: #15153d;
+  --navy-800: #201d52;
+  --violet-700: #3a2a78;
+  /* Sampled from the logo mark's gradient (royal blue → violet → orchid) */
+  --brand-blue: #054aae;
+  --brand-violet: #6559c9;
+  --brand-orchid: #c56ae4;
+  --brand-gradient: linear-gradient(90deg, var(--brand-blue), var(--brand-violet) 50%, var(--brand-orchid));
+  --orchid: #c56ae4;        /* accent on dark: 5.8:1 on navy-950 */
+  --violet-ink: #5546b8;    /* accent text on light: 7:1 on white */
+  --violet: #6559c9;        /* button fill, white text 5.5:1 */
+  /* Neutrals, tinted toward the brand violet */
+  --paper: #f6f5fb;
+  --card: #ffffff;
+  --ink: #15143a;
+  --ink-muted: #54547a;
+  --line: #e3e1ef;
+  --on-dark: #ffffff;
+  --on-dark-muted: #b9b8d9;
+  --line-dark: rgba(255,255,255,.12);
+  /* Type */
+  --font-display: "Montserrat", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  /* MASTER.md scales */
+  --space-xs: .25rem; --space-sm: .5rem; --space-md: 1rem; --space-lg: 1.5rem;
+  --space-xl: 2rem; --space-2xl: 3rem; --space-3xl: 4rem; --space-4xl: 6rem;
+  --radius-sm: 8px; --radius-md: 12px;
+  --shadow-sm: 0 1px 2px rgba(13,14,43,.06);
+  --shadow-md: 0 4px 6px rgba(13,14,43,.08);
+  --shadow-lg: 0 10px 15px rgba(13,14,43,.10);
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--navy-950); color: var(--ink);
+  font: 400 1rem/1.65 var(--font-body); -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--navy-950); }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--orchid); outline-offset: 3px; border-radius: 4px; }
+.icon { width: 1.25rem; height: 1.25rem; flex: none; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+
+.wrap {
+  max-width: 1200px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 768px) { .wrap { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); } }
+
+.band-dark { background: var(--navy-950); color: var(--on-dark); position: relative; overflow: hidden; }
+.band-light { background: var(--paper); color: var(--ink); }
+.band-white { background: var(--card); color: var(--ink); }
+.section { padding-block: var(--space-3xl); }
+@media (min-width: 1024px) { .section { padding-block: var(--space-4xl); } }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: var(--space-sm);
+  font: 600 .75rem/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase;
+  color: var(--violet-ink);
+}
+.eyebrow::before { content: ""; width: 1.5rem; height: 2px; background: currentColor; }
+.band-dark .eyebrow { color: var(--orchid); }
+.h2 { font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem); font-weight: 700; }
+.lead { font-size: 1.125rem; color: var(--ink-muted); max-width: 62ch; }
+.band-dark .lead { color: var(--on-dark-muted); }
+.accent { color: var(--orchid); }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-sm);
+  min-height: 48px; padding: 12px 24px; border-radius: var(--radius-sm);
+  font: 600 .9375rem/1 var(--font-body); text-decoration: none; cursor: pointer;
+  transition: transform 200ms var(--ease), background-color 200ms var(--ease), border-color 200ms var(--ease), color 200ms var(--ease);
+  border: 1.5px solid transparent;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--violet); color: #fff; }
+.btn-primary:hover { background: var(--violet-ink); }
+.btn-ghost { border-color: rgba(255,255,255,.35); color: var(--on-dark); }
+.btn-ghost:hover { border-color: var(--on-dark); }
+.btn .icon { width: 1rem; height: 1rem; transition: transform 200ms var(--ease); }
+.btn:hover .icon { transform: translateX(2px); }
+
+/* Review banner (mockup only) */
+.review { background: var(--violet); color: #fff; font-size: .8125rem; text-align: center; padding-block: 6px; }
+
+/* Header */
+.header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(13,14,43,.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line-dark); color: var(--on-dark); }
+.header::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--brand-gradient); opacity: .5; }
+.header .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--space-lg); min-height: 72px; }
+/* Client logo: the rocket/cloud mark extends above and below the wordmark,
+   so the image is nudged up ~10% to sit the LAUNCH:POINT letters on the nav's optical centre line. */
+.logo { display: inline-flex; align-items: center; flex: none; border-radius: var(--radius-sm); }
+.logo img { display: block; height: 48px; width: auto; max-width: 100%; transform: translateY(-10%); }
+@media (min-width: 768px) { .header .logo img { height: 56px; } }
+.drawer-head .logo img { height: 44px; }
+.footer .logo img { height: 64px; transform: none; }
+.nav { display: none; gap: var(--space-xl); }
+.nav a { text-decoration: none; font-size: .9375rem; font-weight: 500; color: var(--on-dark-muted); transition: color 200ms var(--ease); padding-block: var(--space-sm); }
+.nav a:hover { color: var(--on-dark); }
+.header-cta { display: none; }
+.menu-btn { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: var(--radius-sm); background: transparent; border: 1px solid var(--line-dark); color: var(--on-dark); cursor: pointer; }
+/* Mobile slide-out drawer (left to right, 50–80% of the screen) */
+.drawer-backdrop {
+  position: fixed; inset: 0; z-index: 70; background: rgba(6,7,24,.6);
+  opacity: 0; visibility: hidden;
+  transition: opacity 220ms ease-in, visibility 0s linear 220ms;
+}
+.drawer {
+  position: fixed; top: 0; bottom: 0; left: 0; z-index: 80;
+  width: clamp(50vw, 320px, 80vw);
+  display: flex; flex-direction: column;
+  background: var(--navy-900); color: var(--on-dark);
+  border-right: 1px solid var(--line-dark);
+  box-shadow: 12px 0 32px rgba(0,0,0,.35);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  transform: translateX(-100%); visibility: hidden;
+  /* exit: a little faster, accelerating out */
+  transition: transform 240ms cubic-bezier(.4,0,1,1), visibility 0s linear 240ms;
+  overflow-y: auto; overscroll-behavior: contain;
+}
+.drawer-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); min-height: 72px; padding-inline: var(--space-lg) var(--space-md); border-bottom: 1px solid var(--line-dark); }
+.drawer-nav { display: flex; flex-direction: column; padding: var(--space-sm) 0; }
+.drawer-nav a {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
+  min-height: 56px; padding-inline: var(--space-lg);
+  text-decoration: none; font: 600 1.0625rem/1.2 var(--font-display); color: var(--on-dark);
+  border-bottom: 1px solid var(--line-dark);
+  transition: background-color 200ms var(--ease), color 200ms var(--ease);
+}
+.drawer-nav a .icon { width: 1rem; height: 1rem; color: var(--on-dark-muted); transition: transform 200ms var(--ease), color 200ms var(--ease); }
+.drawer-nav a:hover, .drawer-nav a:focus-visible { background: rgba(255,255,255,.05); color: var(--orchid); }
+.drawer-nav a:hover .icon { transform: translateX(3px); color: var(--orchid); }
+.drawer-nav a:focus-visible { outline-offset: -3px; }
+.drawer-foot { margin-top: auto; padding: var(--space-lg); display: grid; gap: var(--space-md); border-top: 1px solid var(--line-dark); }
+.drawer-foot .btn { width: 100%; }
+.drawer-foot p { font-size: .8125rem; color: var(--on-dark-muted); overflow-wrap: anywhere; }
+.drawer-nav a, .drawer-foot { opacity: 0; transform: translateX(-12px); transition: opacity 160ms ease-in, transform 160ms ease-in, background-color 200ms var(--ease), color 200ms var(--ease); }
+
+/* open state: enter with a decelerating ease, items stagger in after the panel */
+body.menu-open .drawer-backdrop { opacity: 1; visibility: visible; transition: opacity 300ms ease-out, visibility 0s; }
+body.menu-open .drawer { transform: translateX(0); visibility: visible; transition: transform 380ms cubic-bezier(.22,1,.36,1), visibility 0s; }
+body.menu-open .drawer-nav a, body.menu-open .drawer-foot { opacity: 1; transform: none; transition: opacity 320ms var(--ease), transform 320ms var(--ease), background-color 200ms var(--ease), color 200ms var(--ease); }
+body.menu-open .drawer-nav a:nth-child(1) { transition-delay: 120ms, 120ms, 0s, 0s; }
+body.menu-open .drawer-nav a:nth-child(2) { transition-delay: 160ms, 160ms, 0s, 0s; }
+body.menu-open .drawer-nav a:nth-child(3) { transition-delay: 200ms, 200ms, 0s, 0s; }
+body.menu-open .drawer-nav a:nth-child(4) { transition-delay: 240ms, 240ms, 0s, 0s; }
+body.menu-open .drawer-nav a:nth-child(5) { transition-delay: 280ms, 280ms, 0s, 0s; }
+body.menu-open .drawer-foot { transition-delay: 320ms, 320ms, 0s, 0s; }
+body.menu-open { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer, body.menu-open .drawer { transform: none; opacity: 0; transition: opacity 150ms linear, visibility 0s linear 150ms; }
+  body.menu-open .drawer { opacity: 1; transition: opacity 150ms linear, visibility 0s; }
+  .drawer-nav a, .drawer-foot, body.menu-open .drawer-nav a, body.menu-open .drawer-foot { opacity: 1; transform: none; transition: none; }
+}
+@media (min-width: 960px) {
+  .nav, .header-cta { display: flex; }
+  .menu-btn, .drawer, .drawer-backdrop { display: none !important; }
+}
+
+/* Hero */
+.hero { padding-block: var(--space-3xl) var(--space-2xl); }
+.hero::before {
+  content: ""; position: absolute; inset: -20% -10% auto auto; width: 70%; aspect-ratio: 1;
+  background: radial-gradient(closest-side, rgba(44,64,180,.55), transparent 70%); pointer-events: none;
+}
+.hero-grid { position: relative; display: grid; gap: var(--space-2xl); align-items: center; }
+@media (min-width: 1024px) { .hero-grid { grid-template-columns: 1.15fr .85fr; } .hero { padding-block: var(--space-4xl) var(--space-3xl); } }
+.hero h1 { font-size: clamp(2.375rem, 1.4rem + 4.2vw, 4.25rem); font-weight: 800; letter-spacing: -.02em; margin-block: var(--space-lg); }
+.domains { display: flex; flex-wrap: wrap; gap: .35rem .5rem; font: 600 .8125rem/1.6 var(--font-body); color: var(--on-dark-muted); letter-spacing: .04em; text-transform: lowercase; }
+.domains span + span::before { content: ":"; margin-right: .5rem; color: var(--orchid); }
+.hero .lead { margin-block: var(--space-lg) var(--space-xl); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-md); }
+.orbit { width: 100%; max-width: 480px; margin-inline: auto; display: block; }
+.orbit .ring { fill: none; stroke: rgba(255,255,255,.14); stroke-width: 1; }
+.orbit .ring-dash { stroke-dasharray: 2 6; }
+.orbit .node { fill: var(--orchid); }
+.orbit .node-halo { fill: rgba(197,106,228,.18); }
+.orbit text { fill: var(--on-dark); font: 600 13px var(--font-body); letter-spacing: .02em; }
+.orbit .core { fill: var(--navy-800); stroke: rgba(197,106,228,.5); }
+.orbit .rocket { fill: none; stroke: var(--on-dark); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.orbit-spin { transform-origin: 240px 240px; animation: spin 120s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.pedigree { position: relative; margin-top: var(--space-3xl); padding-top: var(--space-xl); border-top: 1px solid var(--line-dark); display: grid; gap: var(--space-md); }
+@media (min-width: 768px) { .pedigree { grid-template-columns: 220px 1fr; align-items: center; } }
+.pedigree p { font-size: .8125rem; color: var(--on-dark-muted); }
+.pedigree ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-sm) var(--space-xl); }
+.pedigree li { font: 700 1rem/1.4 var(--font-display); color: rgba(255,255,255,.78); letter-spacing: .02em; }
+
+/* About */
+.about-grid { display: grid; gap: var(--space-xl); }
+@media (min-width: 1024px) { .about-grid { grid-template-columns: 5fr 7fr; gap: var(--space-3xl); } }
+.about-grid .h2 { margin-top: var(--space-md); }
+.about-copy { display: grid; gap: var(--space-md); font-size: 1.0625rem; color: var(--ink-muted); max-width: 64ch; }
+.about-copy p:first-child { color: var(--ink); font-size: 1.1875rem; line-height: 1.6; }
+.stats { margin-top: var(--space-3xl); display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); border-top: 1px solid var(--line); }
+@media (min-width: 768px) { .stats { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+.stat { padding: var(--space-lg) var(--space-md) 0 0; display: grid; gap: var(--space-xs); }
+.stat strong { font: 700 clamp(2rem, 1.5rem + 1.6vw, 2.75rem)/1 var(--font-display); color: var(--ink); font-variant-numeric: tabular-nums; }
+.stat strong em { font-style: normal; color: var(--violet-ink); }
+.stat span { font-size: .875rem; color: var(--ink-muted); max-width: 22ch; }
+
+/* Services */
+.section-head { display: grid; gap: var(--space-md); margin-bottom: var(--space-2xl); }
+@media (min-width: 1024px) { .section-head.split { grid-template-columns: 5fr 7fr; gap: var(--space-3xl); align-items: end; } }
+.services { display: grid; gap: var(--space-lg); }
+@media (min-width: 768px) { .services { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.service {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-md);
+  padding: var(--space-xl); display: flex; flex-direction: column; gap: var(--space-md);
+  box-shadow: var(--shadow-sm); transition: box-shadow 200ms var(--ease), transform 200ms var(--ease), border-color 200ms var(--ease);
+}
+.service:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); border-color: #d6d2ea; }
+.service-icon { width: 48px; height: 48px; border-radius: var(--radius-sm); display: grid; place-items: center; background: var(--navy-900); color: var(--orchid); }
+.service-icon .icon { width: 1.4rem; height: 1.4rem; }
+.service h3 { font-size: 1.375rem; font-weight: 700; color: var(--ink); }
+.service p { color: var(--ink-muted); }
+.service .tags { display: flex; flex-wrap: wrap; gap: var(--space-sm); list-style: none; margin: 0; padding: 0; }
+.service .tags li { font-size: .75rem; font-weight: 600; color: var(--ink); background: var(--paper); border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px; }
+
+/* Disclosure (shared) */
+details.more summary {
+  list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: .4rem; min-height: 44px;
+  font-weight: 600; font-size: .9375rem; color: var(--violet-ink);
+}
+details.more summary::-webkit-details-marker { display: none; }
+details.more summary .icon { width: 1rem; height: 1rem; transition: transform 200ms var(--ease); }
+details.more[open] summary .icon { transform: rotate(180deg); }
+details.more .more-body { display: grid; gap: var(--space-md); padding-top: var(--space-sm); }
+.band-dark details.more summary { color: var(--orchid); }
+.service details.more { margin-top: auto; border-top: 1px solid var(--line); padding-top: var(--space-sm); }
+
+/* Leadership */
+.band-dark.leaders::before {
+  content: ""; position: absolute; inset: auto auto -30% -15%; width: 60%; aspect-ratio: 1;
+  background: radial-gradient(closest-side, rgba(44,64,180,.45), transparent 70%); pointer-events: none;
+}
+.leader-grid { position: relative; display: grid; gap: var(--space-xl); }
+@media (min-width: 1024px) { .leader-grid { grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--space-lg); } }
+.leader { display: flex; flex-direction: column; gap: var(--space-md); background: var(--navy-900); border: 1px solid var(--line-dark); border-radius: var(--radius-md); padding: var(--space-md) var(--space-md) var(--space-lg); }
+.portrait {
+  position: relative; aspect-ratio: 4 / 5; max-width: 100%; border-radius: var(--radius-sm); overflow: hidden;
+  background: linear-gradient(180deg, #2a2660, #1b1949); display: grid; place-items: center;
+}
+.portrait span { font: 800 3.5rem/1 var(--font-display); color: rgba(255,255,255,.22); letter-spacing: .04em; }
+.portrait small { position: absolute; left: var(--space-md); bottom: var(--space-md); font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase; color: var(--on-dark-muted); }
+.leader-body { padding-inline: var(--space-sm); display: flex; flex-direction: column; gap: var(--space-md); flex: 1; }
+.leader-tag { font: 600 .75rem/1.4 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--orchid); }
+.leader-head { display: flex; justify-content: space-between; align-items: start; gap: var(--space-md); }
+.leader h3 { font-size: 1.5rem; font-weight: 700; }
+.leader .role { font-size: .875rem; color: var(--on-dark-muted); margin-top: var(--space-xs); }
+.li-btn { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: var(--radius-sm); border: 1px solid var(--line-dark); color: var(--on-dark); transition: background-color 200ms var(--ease), border-color 200ms var(--ease); flex: none; }
+.li-btn:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.3); }
+.li-btn .icon { width: 1.1rem; height: 1.1rem; }
+.leader p { color: var(--on-dark-muted); font-size: .9375rem; }
+.leader details.more { margin-top: auto; border-top: 1px solid var(--line-dark); padding-top: var(--space-sm); }
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-sm); border-left: 1px solid var(--line-dark); }
+.timeline li { position: relative; padding-left: var(--space-md); font-size: .875rem; color: var(--on-dark); line-height: 1.5; }
+.timeline li::before { content: ""; position: absolute; left: -4px; top: .5em; width: 7px; height: 7px; border-radius: 50%; background: var(--orchid); }
+.timeline time { display: block; color: var(--on-dark-muted); font-size: .8125rem; font-variant-numeric: tabular-nums; }
+.timeline-label { font: 600 .75rem/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--on-dark-muted); margin-top: var(--space-sm); }
+
+/* Partnering */
+.pillars { display: grid; gap: 0; border-top: 1px solid var(--line); }
+@media (min-width: 1024px) { .pillars { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+.pillar { padding: var(--space-xl) 0; display: grid; align-content: start; gap: var(--space-md); border-bottom: 1px solid var(--line); }
+@media (min-width: 1024px) { .pillar { padding: var(--space-xl) var(--space-xl) 0; border-bottom: 0; border-left: 1px solid var(--line); } .pillar:first-child { border-left: 0; padding-left: 0; } }
+.pillar-icon { color: var(--violet-ink); }
+.pillar-icon .icon { width: 1.75rem; height: 1.75rem; stroke-width: 1.5; }
+.pillar h3 { font-size: 1.25rem; font-weight: 700; }
+.pillar p { color: var(--ink-muted); font-size: .9375rem; }
+.pillar p:first-of-type { color: var(--ink); }
+
+/* CTA */
+.cta { text-align: left; }
+.cta::before {
+  content: ""; position: absolute; inset: -40% -20% auto auto; width: 70%; aspect-ratio: 1;
+  background: radial-gradient(closest-side, rgba(44,64,180,.6), transparent 70%); pointer-events: none;
+}
+.cta-grid { position: relative; display: grid; gap: var(--space-2xl); align-items: end; }
+@media (min-width: 1024px) { .cta-grid { grid-template-columns: 1.1fr .9fr; } }
+.cta-mark { display: block; width: auto; height: 88px; margin-bottom: var(--space-lg); }
+.cta h2 { font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem); font-weight: 800; letter-spacing: -.02em; margin-block: var(--space-md) var(--space-lg); }
+.contact-list { display: grid; gap: var(--space-md); }
+.contact-item { display: flex; gap: var(--space-md); align-items: center; padding: var(--space-lg); border: 1px solid var(--line-dark); border-radius: var(--radius-md); background: rgba(255,255,255,.03); }
+.contact-item .service-icon { background: var(--navy-800); flex: none; }
+.contact-item small { display: block; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--on-dark-muted); }
+.contact-item a, .contact-item span.val { font: 600 1.0625rem/1.4 var(--font-body); text-decoration: none; overflow-wrap: anywhere; user-select: all; }
+.contact-item a:hover { color: var(--orchid); }
+
+/* Footer */
+.footer { background: var(--navy-950); color: var(--on-dark-muted); border-top: 1px solid var(--line-dark); font-size: .875rem; }
+.footer-top { display: grid; gap: var(--space-xl); padding-block: var(--space-2xl); }
+@media (min-width: 768px) { .footer-top { grid-template-columns: 2fr 1fr 1fr; } }
+.footer h3 { font: 600 .75rem/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--on-dark); margin-bottom: var(--space-md); }
+.footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-sm); }
+.footer a { text-decoration: none; }
+.footer a:hover { color: var(--on-dark); }
+.footer .logo { color: var(--on-dark); margin-bottom: var(--space-md); }
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-sm); padding-block: var(--space-lg); border-top: 1px solid var(--line-dark); font-size: .8125rem; }
+
+/* Entrance motion: opacity + transform only, plays once on load */
+.rise { animation: rise 700ms var(--ease) both; }
+.d1 { animation-delay: 80ms; } .d2 { animation-delay: 160ms; } .d3 { animation-delay: 240ms; } .d4 { animation-delay: 320ms; }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise, .orbit-spin { animation: none; }
+  .btn, .service, .btn .icon { transition: none; }
+  .btn:hover, .service:hover { transform: none; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></symbol>
+  <symbol id="i-merge" viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-network" viewBox="0 0 24 24"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></symbol>
+</svg>
+
+<div class="review">Mockup v1 for review. Portraits are placeholders for the photos on the current site.</div>
+
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="assets/launchpoint-logo-white.png" width="494" height="142" alt="Launch:Point home"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#about">About</a><a href="#services">Services</a><a href="#leadership">Leadership</a><a href="#partnering">Partnering</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-primary header-cta" href="#contact">Launch with us <svg class="icon"><use href="#i-arrow"/></svg></a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+
+<!-- Mobile drawer lives outside the header: the header's backdrop-filter would otherwise trap position:fixed -->
+<div class="drawer-backdrop" id="drawer-backdrop" aria-hidden="true"></div>
+<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu" inert>
+  <div class="drawer-head">
+    <a class="logo" href="#top"><img src="assets/launchpoint-logo-white.png" width="494" height="142" alt="Launch:Point home"></a>
+    <button class="menu-btn" id="drawer-close" type="button" aria-label="Close menu"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+  </div>
+  <nav class="drawer-nav" aria-label="Mobile">
+    <a href="#about">About <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <a href="#services">Services <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <a href="#leadership">Leadership <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <a href="#partnering">Partnering <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <a href="#contact">Contact <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </nav>
+  <div class="drawer-foot">
+    <a class="btn btn-primary" href="#contact">Launch with us <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <p>partneradvisor@launchpoint.ph<br>+63 919 999 9701</p>
+  </div>
+</div>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="band-dark hero" id="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="domains rise" aria-label="Focus areas"><span>ai</span><span>cloud</span><span>data</span><span>cybersec</span><span>iot</span><span>network</span><span>managed services</span></p>
+          <h1 id="hero-title" class="rise d1">A business <span class="accent">origination</span> company</h1>
+          <p class="lead rise d2">Launch:Point is a premier business origination and partner advisory firm dedicated to unlocking and securing high-value revenue opportunities for enterprises.</p>
+          <div class="hero-actions rise d3">
+            <a class="btn btn-primary" href="#contact">Launch with us <svg class="icon"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-ghost" href="#services">Explore services</a>
+          </div>
+        </div>
+        <svg class="orbit rise d2" viewBox="-20 -20 520 520" role="img" aria-label="Launch:Point at the centre of AI, Cloud, Data, Cybersecurity, IoT, Network and Managed Services">
+          <circle class="ring" cx="240" cy="240" r="90"/>
+          <circle class="ring" cx="240" cy="240" r="150"/>
+          <circle class="ring ring-dash" cx="240" cy="240" r="210"/>
+          <g class="orbit-spin"><circle class="node" cx="330" cy="240" r="3"/><circle class="node" cx="150" cy="240" r="2"/></g>
+          <g>
+            <circle class="node-halo" cx="240" cy="90" r="11"/><circle class="node" cx="240" cy="90" r="5"/><text x="240" y="66" text-anchor="middle">AI</text>
+            <circle class="node-halo" cx="370" cy="315" r="11"/><circle class="node" cx="370" cy="315" r="5"/><text x="392" y="320">Cloud</text>
+            <circle class="node-halo" cx="110" cy="315" r="11"/><circle class="node" cx="110" cy="315" r="5"/><text x="88" y="320" text-anchor="end">Data</text>
+            <circle class="node-halo" cx="422" cy="135" r="11"/><circle class="node" cx="422" cy="135" r="5"/><text x="422" y="111" text-anchor="middle">Cybersec</text>
+            <circle class="node-halo" cx="345" cy="422" r="11"/><circle class="node" cx="345" cy="422" r="5"/><text x="345" y="452" text-anchor="middle">Managed Services</text>
+            <circle class="node-halo" cx="135" cy="422" r="11"/><circle class="node" cx="135" cy="422" r="5"/><text x="135" y="452" text-anchor="middle">IoT</text>
+            <circle class="node-halo" cx="58" cy="135" r="11"/><circle class="node" cx="58" cy="135" r="5"/><text x="58" y="111" text-anchor="middle">Network</text>
+          </g>
+          <defs><linearGradient id="lp-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#054aae"/><stop offset=".5" stop-color="#6559c9"/><stop offset="1" stop-color="#c56ae4"/></linearGradient></defs>
+          <circle class="core" cx="240" cy="240" r="50" stroke="url(#lp-grad)" stroke-width="1.5"/>
+          <image href="assets/launchpoint-rocket.png" x="224" y="206" width="32" height="70"/>
+        </svg>
+      </div>
+      <div class="pedigree rise d4">
+        <p>Our partner advisors have led teams at</p>
+        <ul>
+          <li>PLDT Enterprise</li><li>ePLDT</li><li>Oracle</li><li>Cisco</li><li>Microsoft</li><li>Fortinet</li><li>SAS Institute</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="band-white section" id="about" aria-labelledby="about-title">
+    <div class="wrap">
+      <div class="about-grid">
+        <div>
+          <p class="eyebrow">Who we are</p>
+          <h2 id="about-title" class="h2">About Launch:Point</h2>
+        </div>
+        <div class="about-copy">
+          <p>We serve as your trusted partner in delivering deep industry insights, driving strategic customer engagements, accelerating market penetration, and executing end-to-end business development and fulfillment of tech based solutions like AI, Cloud, Cybersecurity, IoT and Managed Services.</p>
+          <p>Guided by a seasoned team of expert partner advisors, Launch:Point crafts tailored strategies that establish strong foundations for sustainable, long-term business growth and competitive advantage.</p>
+        </div>
+      </div>
+      <ul class="stats" style="list-style:none;margin-bottom:0;padding:0">
+        <li class="stat"><strong>35<em>+</em></strong><span>Years in telecom and IT leadership</span></li>
+        <li class="stat"><strong>4</strong><span>Partner advisor services, from origination to fulfillment</span></li>
+        <li class="stat"><strong>7</strong><span>Technology domains, from AI to managed services</span></li>
+        <li class="stat"><strong>3</strong><span>Senior partner advisors leading every engagement</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="band-light section" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <div>
+          <p class="eyebrow">What we do</p>
+          <h2 id="services-title" class="h2" style="margin-top:1rem">Partner Advisor Services</h2>
+        </div>
+        <p class="lead">Four services that take an enterprise opportunity from the first conversation to a signed deal and successful delivery.</p>
+      </div>
+      <div class="services">
+        <article class="service">
+          <div class="service-icon"><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg></div>
+          <h3>Business Development</h3>
+          <p>The strategic process of identifying, cultivating, and securing new growth opportunities for enterprises.</p>
+          <ul class="tags"><li>Market research</li><li>Opportunity assessment</li><li>Partnership formation</li></ul>
+          <details class="more"><summary>Read more <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+            <div class="more-body"><p>This includes market research, opportunity assessment, partnership formation, and the creation of actionable plans to drive revenue expansion and market penetration. The team leverages deep industry intelligence and strategic customer engagement to build scalable business models and optimize sales and marketing strategies.</p></div>
+          </details>
+        </article>
+        <article class="service">
+          <div class="service-icon"><svg class="icon" aria-hidden="true"><use href="#i-merge"/></svg></div>
+          <h3>Merger &amp; Acquisitions</h3>
+          <p>Proactively identifying, sourcing, screening, and initiating discussions with acquisition targets to drive inorganic growth for private equity firms, corporate buyers, and investors.</p>
+          <ul class="tags"><li>Target sourcing</li><li>Synergy assessment</li><li>NDAs &amp; LOIs</li></ul>
+          <details class="more"><summary>Read more <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+            <div class="more-body"><p>This encompasses market research to discover targets aligned with strategic fit, financial performance and expansion potential. Engaging decision-makers involves qualifying leads through initial assessments of cultural/operational synergies, risk profiles, and integration feasibility, advancing to exploratory talks, non-disclosure agreements, letters of intent, or advisory mandates.</p></div>
+          </details>
+        </article>
+        <article class="service">
+          <div class="service-icon"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></div>
+          <h3>Solutioning &amp; Architecting</h3>
+          <p>Designing tailored, process-driven solutions that transform business challenges into scalable, efficient systems.</p>
+          <ul class="tags"><li>Workflow mapping</li><li>Solution architecture</li><li>Revenue frameworks</li></ul>
+          <details class="more"><summary>Read more <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+            <div class="more-body"><p>This approach focuses on simplifying complexity by mapping workflows, identifying inefficiencies, and collaboratively building robust architectures that align with strategic goals. The methodology goes beyond advice, emphasizing practical implementation and impact by structuring customer engagements and revenue opportunity frameworks with clarity, consistency, and collaboration.</p></div>
+          </details>
+        </article>
+        <article class="service">
+          <div class="service-icon"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></div>
+          <h3>Project Fulfillment</h3>
+          <p>A comprehensive service that ensures the successful execution and delivery of business initiatives, turning strategic plans into tangible results.</p>
+          <ul class="tags"><li>Deal negotiation</li><li>Closure</li><li>Account management</li></ul>
+          <details class="more"><summary>Read more <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+            <div class="more-body"><p>This includes negotiating key terms and facilitating agreements to advance deals to closure, as well as monitoring and managing ongoing client or deal relationships for business growth and long-term value.</p></div>
+          </details>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section class="band-dark section leaders" id="leadership" aria-labelledby="leadership-title">
+    <div class="wrap">
+      <div class="section-head split" style="position:relative">
+        <div>
+          <p class="eyebrow">Leadership</p>
+          <h2 id="leadership-title" class="h2" style="margin-top:1rem">Driving Our Vision Forward</h2>
+        </div>
+        <p class="lead">Seasoned partner advisors with decades of senior leadership across telecommunications, IT and business process outsourcing.</p>
+      </div>
+      <div class="leader-grid">
+        <!-- John -->
+        <article class="leader">
+          <div class="portrait"><span aria-hidden="true">JG</span><small>Photo: John Gonzales</small></div>
+          <div class="leader-body">
+            <p class="leader-tag">Driving our vision forward</p>
+            <div class="leader-head">
+              <div><h3>John Gonzales</h3><p class="role">Former CEO &amp; President, PLDT Clark Telecom Inc.</p></div>
+              <a class="li-btn" href="#" aria-label="John Gonzales on LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a>
+            </div>
+            <p>A seasoned business leader with over 35 years of experience in the telecommunications and Information Technology industry, including 19 years in senior executive roles. Proven success in launching and transforming businesses to achieve revenue, profitability and operational excellence.</p>
+            <details class="more"><summary>Full profile &amp; experience <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+              <div class="more-body">
+                <p>His ability to integrate technology with business strategy has enabled the successful rollout of cutting-edge services, contributing to the digital empowerment of enterprises. John's executive approach combines visionary strategy with hands-on execution, inspiring teams to exceed targets and deliver measurable results in dynamic environments.</p>
+                <p class="timeline-label">Experience</p>
+                <ul class="timeline">
+                  <li>CEO &amp; President, PLDT Clark Telecom Inc.<time>2024–2025</time></li>
+                  <li>FVP &amp; Head, Partner &amp; Alliance / Business Development / Product Development, PLDT Enterprise<time>2024–2025</time></li>
+                  <li>Chief Commercial Officer, ePLDT<time>2022–2023</time></li>
+                  <li>FVP &amp; Head, Enterprise Digital Solutions, PLDT Enterprise<time>2015–2021</time></li>
+                  <li>VP &amp; Head, Customer Relations Management, PLDT Enterprise<time>2013–2015</time></li>
+                  <li>Founder &amp; CEO, Business Cloud Live<time>2011–2013</time></li>
+                  <li>General Manager, Jebsen &amp; Jessen Communications PH<time>2009–2011</time></li>
+                  <li>General Manager, Teledata Communications Philippines<time>2006–2008</time></li>
+                  <li>Territory Manager, Oracle Philippines<time>2004–2006</time></li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </article>
+        <!-- Mitch -->
+        <article class="leader">
+          <div class="portrait"><span aria-hidden="true">ML</span><small>Photo: Mitch Locsin</small></div>
+          <div class="leader-body">
+            <p class="leader-tag">Leading with purpose</p>
+            <div class="leader-head">
+              <div><h3>Mitch Locsin</h3><p class="role">Chairman, Contact Center Association of the Philippines</p></div>
+              <a class="li-btn" href="#" aria-label="Mitch Locsin on LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a>
+            </div>
+            <p>A recognized and pioneering leader in the BPO industry, Mitch played a key role having served as a Senate Consultant for IT/BPO and Economic Affairs. He leads several industry associations and had been a driving force behind the Next Wave Cities program, successfully attracting foreign investments, expansion opportunities and exponentially growing the industry.</p>
+            <details class="more"><summary>Full profile &amp; experience <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+              <div class="more-body">
+                <p>With strong expertise in sales and marketing, Mitch fueled PLDT's Enterprise and International revenue growth in technology-driven digital markets. He crafts and executes high-impact, precision-driven sales strategies that deliver results. Committed to operational excellence and business efficiency, he has built and led multi-channel sales teams that regularly exceed targets and achieve sustained year-over-year growth.</p>
+                <p class="timeline-label">Experience</p>
+                <ul class="timeline">
+                  <li>Chairman, Contact Center Association of the Philippines<time>2023–present</time></li>
+                  <li>Member of the Board of Trustees, IT &amp; Business Process Association of the Philippines<time>2023–present</time></li>
+                  <li>FVP &amp; Head, PLDT Enterprise and International Business Groups<time>2023–2025</time></li>
+                  <li>FVP &amp; Head, PLDT International Revenue Group, International and Carrier Business<time>2019–2022</time></li>
+                  <li>FVP &amp; Head, PLDT SME &amp; Regional Enterprise<time>2015–2019</time></li>
+                  <li>VP &amp; Head, PLDT ALPHA CRM Outsourcing and Offshoring Industry and International Business<time>2011–2015</time></li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </article>
+        <!-- Louie -->
+        <article class="leader">
+          <div class="portrait"><span aria-hidden="true">LC</span><small>Photo: Louie Castaneda</small></div>
+          <div class="leader-body">
+            <p class="leader-tag">Create value. Achieve excellence.</p>
+            <div class="leader-head">
+              <div><h3>Louie Castaneda</h3><p class="role">Former Sr. Director &amp; Head of Apps Business, Oracle Philippines</p></div>
+              <a class="li-btn" href="#" aria-label="Louie Castaneda on LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a>
+            </div>
+            <p>A highly accomplished and seasoned IT industry leader with a remarkable track record for over 35 years. During his career, he has held country leadership positions across global organizations such as Cisco, Fortinet, Oracle, Microsoft, and SAS Institute.</p>
+            <details class="more"><summary>Full profile &amp; experience <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+              <div class="more-body">
+                <p>With a solid foundation in sales, operational management and technical expertise spanning application systems, analytics, cybersecurity and network engineering, Louie has been a driving force in delivering cutting-edge IT and application management strategies and solutions that have significantly contributed to the growth and innovation of the organizations under his stewardship. His industry experience and strategic vision have firmly established him as a respected figure in the Philippine IT sector, a leader who consistently delivers impactful results and drives sustainable success.</p>
+                <p class="timeline-label">Experience</p>
+                <ul class="timeline">
+                  <li>Sr. Director and Head of Apps Business, Oracle Philippines<time>2024–2025</time></li>
+                  <li>Managing Director, SAS Institute Philippines Inc.<time>2022–2023</time></li>
+                  <li>Country Manager, Fortinet Philippines Inc.<time>2018–2022</time></li>
+                  <li>SVP, Sales and Business Development, TIM Corp<time>2017–2018</time></li>
+                  <li>Chief Executive Officer, CalibrIT Systems<time>2016–2017</time></li>
+                  <li>Country Manager, Cisco Systems, Philippines Branch<time>2014–2016</time></li>
+                  <li>Director, Microsoft Philippines Corporation<time>2003–2009</time></li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERING -->
+  <section class="band-white section" id="partnering" aria-labelledby="partnering-title">
+    <div class="wrap">
+      <div class="section-head split">
+        <div>
+          <p class="eyebrow">Why partner with us</p>
+          <h2 id="partnering-title" class="h2" style="margin-top:1rem">Partnering With Launch:Point</h2>
+        </div>
+        <p class="lead">Relationships, resources and disciplined capacity: the three things that move enterprise deals to closure faster.</p>
+      </div>
+      <div class="pillars">
+        <article class="pillar">
+          <div class="pillar-icon"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></div>
+          <h3>Leverage on existing relationships</h3>
+          <p>Strategically nurturing and expanding the value derived from current clients by deepening engagement and trust, through data-driven insights, regular personalized communication, and exceptional service that reinforces loyalty and satisfaction.</p>
+          <p>Launch:Point helps businesses identify upsell and cross-sell opportunities, as well as gain referrals, by closely managing customer interactions in a holistic and organized manner.</p>
+        </article>
+        <article class="pillar">
+          <div class="pillar-icon"><svg class="icon" aria-hidden="true"><use href="#i-network"/></svg></div>
+          <h3>Broad network of sales and tech resources</h3>
+          <p>Harnessing a broad ecosystem of skilled professionals, advanced tools, and strategic partnerships to accelerate business growth and solution delivery.</p>
+          <p>This network provides access to specialized sales expertise, cutting-edge technical capabilities, and innovative market approaches that enhance market reach and competitive positioning.</p>
+        </article>
+        <article class="pillar">
+          <div class="pillar-icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></div>
+          <h3>Manage time and capacity</h3>
+          <p>Optimizing how resources and schedules are allocated to maximize productivity and meet client commitments efficiently, with clarity and consistency that accelerate deal progression and closure.</p>
+          <p>Timely delivery without compromising quality, with the flexibility to adapt to changing priorities. Through capacity planning, Launch:Point helps businesses unlock operational efficiency and sustainable growth.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / CONTACT -->
+  <section class="band-dark section cta" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="cta-grid">
+        <div>
+          <img class="cta-mark" src="assets/launchpoint-rocket.png" width="137" height="300" alt="" loading="lazy">
+          <p class="eyebrow">Get in touch</p>
+          <h2 id="contact-title">Launch <span class="accent">with</span> us</h2>
+          <p class="lead">Talk to a partner advisor about your next enterprise technology deal.</p>
+        </div>
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="service-icon"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></div>
+            <div><small>Email</small><a href="mailto:partneradvisor@launchpoint.ph">partneradvisor@launchpoint.ph</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="service-icon"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></div>
+            <div><small>Mobile</small><a href="tel:+639199999701">+63 919 999 9701</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a class="logo" href="#top"><img src="assets/launchpoint-logo-white.png" width="494" height="142" alt="Launch:Point" loading="lazy"></a>
+        <p style="max-width:40ch">A business origination and partner advisory firm for enterprise AI, Cloud, Data, Cybersecurity, IoT, Network and Managed Services deals.</p>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#leadership">Leadership</a></li><li><a href="#partnering">Partnering</a></li></ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul><li><a href="mailto:partneradvisor@launchpoint.ph">partneradvisor@launchpoint.ph</a></li><li><a href="tel:+639199999701">+63 919 999 9701</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Launch:Point. All rights reserved.</span>
+      <span>Powered and designed by Upstream Techies</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var openBtn = document.getElementById('menu-btn');
+    var closeBtn = document.getElementById('drawer-close');
+    var drawer = document.getElementById('drawer');
+    var backdrop = document.getElementById('drawer-backdrop');
+    var main = document.getElementById('top');
+    var isOpen = false;
+
+    function setOpen(open, returnFocus) {
+      isOpen = open;
+      document.body.classList.toggle('menu-open', open);
+      openBtn.setAttribute('aria-expanded', String(open));
+      if (open) {
+        drawer.removeAttribute('inert');
+        main.setAttribute('inert', '');
+        closeBtn.focus({ preventScroll: true });
+      } else {
+        drawer.setAttribute('inert', '');
+        main.removeAttribute('inert');
+        if (returnFocus) openBtn.focus({ preventScroll: true });
+      }
+    }
+
+    openBtn.addEventListener('click', function () { setOpen(true); });
+    closeBtn.addEventListener('click', function () { setOpen(false, true); });
+    backdrop.addEventListener('click', function () { setOpen(false, true); });
+    drawer.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+
+    document.addEventListener('keydown', function (e) {
+      if (!isOpen) return;
+      if (e.key === 'Escape') { setOpen(false, true); return; }
+      if (e.key !== 'Tab') return;
+      // keep keyboard focus inside the drawer while it is open
+      var items = drawer.querySelectorAll('a, button');
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    // close if the viewport grows to desktop while open
+    window.matchMedia('(min-width: 960px)').addEventListener('change', function (mq) { if (mq.matches && isOpen) setOpen(false); });
+  })();
+</script>
