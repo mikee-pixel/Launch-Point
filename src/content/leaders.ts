@@ -1,11 +1,13 @@
 import type { Leader } from "./types";
 
-// TODO: client to supply portrait photos and LinkedIn profile URLs for each leader.
+// TODO: client to supply LinkedIn profile URLs for each leader.
+// Photos: the #DEE4F6 backdrop must be in the image file itself (see design-system/launchpoint/pages/home.md).
 export const leaders: Leader[] = [
   {
     slug: "john-gonzales",
     name: "John Gonzales",
     initials: "JG",
+    photo: "/images/team/john-gonzales.jpg",
     tagline: "Driving our vision forward",
     role: "Former CEO & President, PLDT Clark Telecom Inc.",
     summary:
@@ -42,49 +44,50 @@ export const leaders: Leader[] = [
       { title: "Territory Manager, Oracle Philippines", period: "2004–2006" },
     ],
   },
-  {
-    slug: "mitch-locsin",
-    name: "Mitch Locsin",
-    initials: "ML",
-    tagline: "Leading with purpose",
-    role: "Chairman, Contact Center Association of the Philippines",
-    summary:
-      "A recognized and pioneering leader in the BPO industry, Mitch played a key role having served as a Senate Consultant for IT/BPO and Economic Affairs. He leads several industry associations and had been a driving force behind the Next Wave Cities program, successfully attracting foreign investments, expansion opportunities and exponentially growing the industry.",
-    bio: "With strong expertise in sales and marketing, Mitch fueled PLDT's Enterprise and International revenue growth in technology-driven digital markets. He crafts and executes high-impact, precision-driven sales strategies that deliver results. Committed to operational excellence and business efficiency, he has built and led multi-channel sales teams that regularly exceed targets and achieve sustained year-over-year growth.",
-    experience: [
-      {
-        title: "Chairman, Contact Center Association of the Philippines",
-        period: "2023–present",
-      },
-      {
-        title:
-          "Member of the Board of Trustees, IT & Business Process Association of the Philippines",
-        period: "2023–present",
-      },
-      {
-        title: "FVP & Head, PLDT Enterprise and International Business Groups",
-        period: "2023–2025",
-      },
-      {
-        title:
-          "FVP & Head, PLDT International Revenue Group, International and Carrier Business",
-        period: "2019–2022",
-      },
-      {
-        title: "FVP & Head, PLDT SME & Regional Enterprise",
-        period: "2015–2019",
-      },
-      {
-        title:
-          "VP & Head, PLDT ALPHA CRM Outsourcing and Offshoring Industry and International Business",
-        period: "2011–2015",
-      },
-    ],
-  },
+  // {
+  //   slug: "mitch-locsin",
+  //   name: "Mitch Locsin",
+  //   initials: "ML",
+  //   tagline: "Leading with purpose",
+  //   role: "Chairman, Contact Center Association of the Philippines",
+  //   summary:
+  //     "A recognized and pioneering leader in the BPO industry, Mitch played a key role having served as a Senate Consultant for IT/BPO and Economic Affairs. He leads several industry associations and had been a driving force behind the Next Wave Cities program, successfully attracting foreign investments, expansion opportunities and exponentially growing the industry.",
+  //   bio: "With strong expertise in sales and marketing, Mitch fueled PLDT's Enterprise and International revenue growth in technology-driven digital markets. He crafts and executes high-impact, precision-driven sales strategies that deliver results. Committed to operational excellence and business efficiency, he has built and led multi-channel sales teams that regularly exceed targets and achieve sustained year-over-year growth.",
+  //   experience: [
+  //     {
+  //       title: "Chairman, Contact Center Association of the Philippines",
+  //       period: "2023–present",
+  //     },
+  //     {
+  //       title:
+  //         "Member of the Board of Trustees, IT & Business Process Association of the Philippines",
+  //       period: "2023–present",
+  //     },
+  //     {
+  //       title: "FVP & Head, PLDT Enterprise and International Business Groups",
+  //       period: "2023–2025",
+  //     },
+  //     {
+  //       title:
+  //         "FVP & Head, PLDT International Revenue Group, International and Carrier Business",
+  //       period: "2019–2022",
+  //     },
+  //     {
+  //       title: "FVP & Head, PLDT SME & Regional Enterprise",
+  //       period: "2015–2019",
+  //     },
+  //     {
+  //       title:
+  //         "VP & Head, PLDT ALPHA CRM Outsourcing and Offshoring Industry and International Business",
+  //       period: "2011–2015",
+  //     },
+  //   ],
+  // },
   {
     slug: "louie-castaneda",
     name: "Louie Castaneda",
     initials: "LC",
+    photo: "/images/team/louie-castaneda.jpg",
     tagline: "Create value. Achieve excellence.",
     role: "Former Sr. Director & Head of Apps Business, Oracle Philippines",
     summary:

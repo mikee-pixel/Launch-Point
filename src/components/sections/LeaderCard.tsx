@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Disclosure } from "@/components/ui/Disclosure";
 import { LinkedInIcon } from "@/components/ui/Icon";
 import type { Leader } from "@/content/types";
+import { cn } from "@/lib/utils";
 
 type LeaderCardProps = {
   leader: Leader;
@@ -9,14 +10,21 @@ type LeaderCardProps = {
 
 function Portrait({ leader }: LeaderCardProps) {
   return (
-    <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-gradient-to-b from-navy-800 to-navy-900">
+    <div
+      className={cn(
+        "relative aspect-[4/5] overflow-hidden rounded-sm",
+        leader.photo
+          ? "bg-portrait lg:aspect-square"
+          : "bg-gradient-to-b from-navy-800 to-navy-900",
+      )}
+    >
       {leader.photo ? (
         <Image
           src={leader.photo}
           alt={`Portrait of ${leader.name}`}
           fill
-          sizes="(min-width: 1200px) 370px, (min-width: 1024px) 30vw, 100vw"
-          className="object-cover"
+          sizes="(min-width: 1200px) 530px, (min-width: 660px) 50vw, 100vw"
+          className="object-cover object-top"
         />
       ) : (
         <span

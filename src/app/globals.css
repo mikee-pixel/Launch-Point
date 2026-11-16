@@ -26,6 +26,9 @@
   --color-on-dark-muted: #b9b8d9;
   --color-line-dark: rgb(255 255 255 / 0.12);
   --color-backdrop: rgb(6 7 24 / 0.6);
+  /* Shared studio backdrop of leader headshots (design-system/launchpoint/pages/home.md).
+     Baked into each photo file; used here as the portrait tile's loading placeholder. */
+  --color-portrait: #dee4f6;
 
   /* Semantic aliases (CLAUDE.md: bg-background, text-foreground, text-brand) */
   --color-background: var(--color-paper);

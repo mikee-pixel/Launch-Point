@@ -76,7 +76,10 @@ export type Leader = {
   experience: ExperienceItem[];
   /** Omitted until confirmed; the LinkedIn button only renders when present. */
   linkedin?: string;
-  /** Path under /public/images/team once the client supplies photos. */
+  /**
+   * Path under /public/images/team. Photos must have the shared #DEE4F6 portrait backdrop
+   * baked in (see design-system/launchpoint/pages/home.md).
+   */
   photo?: string;
 };
 

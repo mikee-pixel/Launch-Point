@@ -31,7 +31,9 @@ export function LeadershipSection({ intro, data }: LeadershipSectionProps) {
             tone="dark"
           />
         </Reveal>
-        <Stagger className="grid gap-8 lg:grid-cols-3 lg:gap-6">
+        {/* Auto-fit: columns follow the leader count and container width (1 on mobile,
+            2+ when there's room); empty tracks collapse so cards always fill the row. */}
+        <Stagger className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-8 md:gap-6">
           {data.map((leader) => (
             <StaggerItem key={leader.slug} className="h-full">
               <LeaderCard leader={leader} />

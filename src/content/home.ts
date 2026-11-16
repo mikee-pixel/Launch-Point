@@ -62,7 +62,7 @@ export const about: AboutContent = {
       label: "Partner advisor services, from origination to fulfillment",
     },
     { value: "7", label: "Technology domains, from AI to managed services" },
-    { value: "3", label: "Senior partner advisors leading every engagement" },
+    { value: "2", label: "Senior partner advisors leading every engagement" },
   ],
 };
 
