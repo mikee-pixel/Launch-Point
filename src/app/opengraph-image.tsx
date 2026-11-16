@@ -8,6 +8,8 @@ export const alt = `${siteConfig.name}, business origination and partner advisor
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+export const dynamic = "force-static";
+
 // ImageResponse can't read CSS variables; these mirror the MASTER.md tokens.
 const brand = {
   navy950: "#0d0e2b",

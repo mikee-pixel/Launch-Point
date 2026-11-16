@@ -5,11 +5,12 @@ const nextConfig: NextConfig = {
   experimental: {
     agentFeedback: true,
   },
-  cacheComponents: true,
+  // cacheComponents: true,
+  output: "export",
   images: {
-    formats: ["image/avif", "image/webp"],
+    unoptimized: true,
   },
-  partialPrefetching: true,
+  // partialPrefetching: true,
   turbopack: {
     rules: {
       "*.css": {
